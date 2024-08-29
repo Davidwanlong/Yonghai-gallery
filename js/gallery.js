@@ -1,3 +1,28 @@
+// 获取按钮和视频元素
+const video1Btn = document.getElementById('video1-btn');
+const video2Btn = document.getElementById('video2-btn');
+const video1 = document.getElementById('video1');
+const video2 = document.getElementById('video2');
+
+// 添加按钮点击事件
+video1Btn.addEventListener('click', () => {
+    video1.style.display = 'block';
+    video2.style.display = 'none';
+    video1Btn.classList.add('active');
+    video2Btn.classList.remove('active');
+    video1.play(); // 播放当前视频
+    video2.pause(); // 暂停另一个视频
+});
+
+video2Btn.addEventListener('click', () => {
+    video1.style.display = 'none';
+    video2.style.display = 'block';
+    video2Btn.classList.add('active');
+    video1Btn.classList.remove('active');
+    video2.play(); // 播放当前视频
+    video1.pause(); // 暂停另一个视频
+});
+
 
 // 右侧电梯功能
 // 获取元素

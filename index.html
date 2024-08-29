@@ -59,16 +59,25 @@
             </div>
         </div>
         <div class="right-b">
-            <div class="vid-con">
-                <!-- 嵌入视频 -->
-                <video controls autoplay loop muted>
-                    <source src="./video/test.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="art-con">
-                <video controls autoplay loop>
-                    <source src="./video/wfp-s.mp4" type="video/mp4">
-                </video>
+            <div class="video-container">
+                <div class="dairy">
+                    <p>Gallery dairy</p>
+                    <p>The voice of beauty speaks softly, it creeps only into the most fully awakened souls.</p>
+                </div>
+                <div class="video-header">
+                    <button id="video1-btn" class="active">Yonghai Album</button>
+                    <button id="video2-btn">World Masterpieces</button>
+                </div>
+                <div class="vid-con">
+                    <!-- 嵌入视频 1 -->
+                    <video id="video1" controls autoplay loop muted>
+                        <source src="./video/test.mp4" type="video/mp4">
+                    </video>
+                    <!-- 嵌入视频 2（默认隐藏）-->
+                    <video id="video2" controls autoplay loop muted style="display:none;">
+                        <source src="./video/wfp-s.mp4" type="video/mp4">
+                    </video>
+                </div>
             </div>
         </div>
  </div>
