@@ -1,0 +1,253 @@
+html {
+    scroll-behavior: smooth;
+}
+ 
+body {
+    font-family: "Ubuntu", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.topbar {
+    background-color: #333;
+    height: 40px;
+    width: 100%; /* 确保 topbar 的宽度为 100% */
+}
+.wrap{
+    width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+/*顶部导航样式start*/
+.navigation {
+    margin-top: 10px;
+    width: 100%; /* 宽度为 100% */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    /* background-color: #bbcdc5; */
+    color: white;
+}
+.logo img {
+    width: 120px; /* 根据需要调整宽度 */
+    height: auto; /* 保持比例 */
+}
+.logo2 img {
+    width: 320px;
+    border-radius: 5px; /* 让图片的边角稍微圆润 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19); /* 添加阴影效果 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加动画效果，鼠标悬停时变换 */
+}
+
+.logo2 img:hover {
+    transform: scale(1.05); /* 当鼠标悬停时，图片稍微放大 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 12px 30px rgba(0, 0, 0, 0.35); /* 增强悬停时的阴影效果 */
+}
+.nav-wrap{
+    /* background-color: #e8fad7; */
+    height: 90px;
+    padding-top: 2px;
+}
+.title {
+    margin-top: 10px;
+    font-size: 2.5em;
+    color: #8c4356;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+.navigation .logo {
+    font-size: 1.5em;
+}
+.nav-links {
+    padding-top: 15px;
+    padding-right: 10px;
+    list-style: none;
+    display: flex;
+}
+.nav-links li {
+    margin: 0 10px;
+}
+.nav-links a {
+    color: gray;
+    text-decoration: none;
+    transition: color 0.3s; /* 添加过渡效果 */
+    font-size: 1.5em;
+}
+.nav-links a:hover {
+    color: #ff4500; /* 橘红色 */
+    text-decoration: underline;
+}
+/*顶部导航样式end*/
+ 
+/* Contact Section */
+.contact {
+    background-color: #fff;
+    padding: 50px 0;
+}
+ 
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1226px;
+    margin: 0 auto;
+}
+ 
+.contact-container h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+ 
+.contact-form {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 30px;
+}
+ 
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+ 
+.contact-form button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #bbcdc5;
+    color: #fff;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+ 
+.contact-form button:hover {
+    background-color: #8c4356;
+}
+ 
+/* Contact Details */
+.contact-details {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 30px;
+}
+ 
+.contact-details dl,
+.additional-contact-details dl {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+}
+ 
+.contact-details dd,
+.additional-contact-details dd {
+    margin-bottom: 10px;
+    font-size: 1em;
+    color: #333;
+}
+ 
+.contact-details dd span,
+.additional-contact-details dd span {
+    font-weight: bold;
+    color: #8c4356;
+}
+ 
+/* Additional Contact Details */
+.additional-contact-details {
+    width: 100%;
+    max-width: 800px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+ 
+.additional-contact-details h3 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+}
+ 
+/* Map */
+.contact-map {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    border: none;
+}
+ 
+/* Footer */
+footer {
+    padding: 20px;
+    background-color: #bbcdc5;
+    color: white;
+}
+ 
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+}
+ 
+.footer-content dl {
+    margin: 0;
+    padding: 0;
+}
+ 
+.footer-content dt {
+    display: none;
+}
+ 
+.footer-content dd {
+    margin: 5px 0;
+}
+ 
+.footer-content .links a {
+    color: white;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+ 
+@media (max-width: 768px) {
+    .navigation,
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+ 
+    .content {
+        flex-direction: column;
+    }
+ 
+    .artist-section,
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+ 
+    .card {
+        width: 90%;
+        margin: 5px 0;
+    }
+ 
+    .contact-container {
+        padding: 20px 10px;
+    }
+ 
+    .contact-form {
+        width: 100%;
+        max-width: 100%;
+    }
+ 
+    .contact-map {
+        height: 300px;
+    }
+}

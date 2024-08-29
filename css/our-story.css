@@ -1,0 +1,198 @@
+html {
+    scroll-behavior: smooth;
+}
+
+/* 基本样式 */
+body {
+    font-family: "Ubuntu", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.topbar {
+    background-color: #333;
+    height: 40px;
+    width: 100%; /* 确保 topbar 的宽度为 100% */
+}
+.wrap{
+    width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+/*顶部导航样式start*/
+.navigation {
+    margin-top: 10px;
+    width: 100%; /* 宽度为 100% */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    /* background-color: #bbcdc5; */
+    color: white;
+}
+.logo img {
+    width: 120px; /* 根据需要调整宽度 */
+    height: auto; /* 保持比例 */
+}
+.logo2 img {
+    width: 320px;
+    border-radius: 5px; /* 让图片的边角稍微圆润 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19); /* 添加阴影效果 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加动画效果，鼠标悬停时变换 */
+}
+
+.logo2 img:hover {
+    transform: scale(1.05); /* 当鼠标悬停时，图片稍微放大 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 12px 30px rgba(0, 0, 0, 0.35); /* 增强悬停时的阴影效果 */
+}
+.nav-wrap{
+    /* background-color: #e8fad7; */
+    height: 90px;
+    padding-top: 2px;
+}
+.title {
+    margin-top: 10px;
+    font-size: 2.5em;
+    color: #8c4356;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+.navigation .logo {
+    font-size: 1.5em;
+}
+.nav-links {
+    padding-top: 15px;
+    padding-right: 10px;
+    list-style: none;
+    display: flex;
+}
+.nav-links li {
+    margin: 0 10px;
+}
+.nav-links a {
+    color: gray;
+    text-decoration: none;
+    transition: color 0.3s; /* 添加过渡效果 */
+    font-size: 1.5em;
+}
+.nav-links a:hover {
+    color: #ff4500; /* 橘红色 */
+    text-decoration: underline;
+}
+/*顶部导航样式end*/
+
+
+/* our story start */
+.our-story {
+    padding: 20px;
+}
+.story-container {
+    width: 1226px;
+    margin: 0 auto; 
+    
+}
+.story {
+    width: 1226px;
+    background-color: #f0fcff;
+    padding: 10px;
+    font-size: 24px;
+    text-indent: 2em;
+    overflow: hidden;
+}
+.story p {
+    text-align: left;            /* 左对齐 */
+    text-indent: 2em;            /* 首行缩进 */
+    font-size: 18px;             /* 字体大小 */
+    color: gray;                 /* 字体颜色 */
+    line-height: 1.6;            /* 增加行间距，改善可读性 */
+}
+/* .story::first-letter{
+    font-size: 1.8em;
+    float: left;
+} */
+
+#fap {
+    width: 500px;
+    float: right;
+    margin-top: 1em;
+    margin-right: 1em;
+    margin-left:0.5em ;
+    /* border-radius: 3%; */
+}
+#sngo {
+    width: 300px;
+    float: left;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+#ske {
+    width: 300px;
+    float: left;
+    margin-left: 1em;
+    margin-right: 1em;
+   
+    /* border-radius: 3%; */
+}
+#wif {
+    width: 500px;
+    float: right;
+    margin-top: 1em;
+    margin-right: 1em;
+    margin-left:0.5em ;
+    /* border-radius: 3%; */
+}
+/* our story end */
+
+
+#rbt{
+    margin-left: 20px;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+/* 页脚样式 */
+footer {
+    padding: 20px;
+    background-color: #bbcdc5;
+    color: white;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-content .links {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-content .links a {
+    color: white;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .navigation,
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .artist-section,
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+        margin: 5px 0;
+    }
+}

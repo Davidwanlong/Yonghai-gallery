@@ -1,0 +1,232 @@
+/* 基本样式 */
+body {
+    font-family: "Ubuntu", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.topbar {
+    background-color: #333;
+    height: 40px;
+    width: 100%; /* 确保 topbar 的宽度为 100% */
+}
+.wrap{
+    width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+/*顶部导航样式start*/
+.navigation {
+    margin-top: 10px;
+    width: 100%; /* 宽度为 100% */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    /* background-color: #bbcdc5; */
+    color: white;
+}
+.logo img {
+    width: 120px; /* 根据需要调整宽度 */
+    height: auto; /* 保持比例 */
+}
+.logo2 img {
+    width: 320px;
+    border-radius: 5px; /* 让图片的边角稍微圆润 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19); /* 添加阴影效果 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加动画效果，鼠标悬停时变换 */
+}
+
+.logo2 img:hover {
+    transform: scale(1.05); /* 当鼠标悬停时，图片稍微放大 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 12px 30px rgba(0, 0, 0, 0.35); /* 增强悬停时的阴影效果 */
+}
+.nav-wrap{
+    /* background-color: #e8fad7; */
+    height: 90px;
+    padding-top: 2px;
+}
+.title {
+    margin-top: 10px;
+    font-size: 2.5em;
+    color: #8c4356;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+.navigation .logo {
+    font-size: 1.5em;
+}
+.nav-links {
+    padding-top: 15px;
+    padding-right: 10px;
+    list-style: none;
+    display: flex;
+}
+.nav-links li {
+    margin: 0 10px;
+}
+.nav-links a {
+    color: gray;
+    text-decoration: none;
+    transition: color 0.3s; /* 添加过渡效果 */
+    font-size: 1.5em;
+}
+.nav-links a:hover {
+    color: #ff4500; /* 橘红色 */
+    text-decoration: underline;
+}
+/*顶部导航样式end*/
+
+
+.intro {
+    text-align: center; /* 使文字居中对齐 */
+    margin-top: 30px; 
+}
+
+.intro p {
+    font-size: 18px; /* 文字大小 */
+    color:darkgreen; /* 文字颜色 */
+    margin: 0; /* 去掉段落的默认上下间距 */
+}
+
+/* 让按钮水平居中 */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* 按钮之间的间距 */
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+/* 设置按钮的样式 */
+.button-container button {
+    border: 1px solid #8b4513;
+    border-radius: 8px;
+    background-color: #f4e1a1;
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    color: #4b371c;
+    transition:background-color 0.3s, transform 0.2s;
+}
+.button-container button:hover {
+ background-color: #e0c484;
+ transform: translateY(-2px)
+}
+.his {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.his img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.his div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 水平居中 */
+    text-align: center; /* 文字居中对齐 */
+    padding: 10px; /* 可选的内边距，根据需要调整 */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.his div p {
+    text-align: left; /* 文字左对齐 */
+    text-indent: 20px; /* 首行缩进 */
+    line-height: 1.6;
+    margin: 0 0 20px; 
+    font-size: 16px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+#rbt{
+    margin-left: 20px;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+/* 页脚样式 */
+footer {
+    padding: 20px;
+    background-color: #bbcdc5;
+    color: white;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-content .links {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-content .links a {
+    color: white;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+/* flickr container 样式 start */
+
+.archives {
+    padding: 20px;
+}
+
+/* 设置图片容器的布局为水平排列 */
+.archives-container {
+    display: flex;
+    flex-wrap: wrap; /* 允许图片自动换行 */
+    justify-content: center; /* 图片水平居中对齐 */
+    gap: 10px; /* 图片之间的间距 */
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* 设置每个图片项的样式 */
+.photo-wrapper {
+    flex: 1 1 300px; /* 每个图片项最小宽度为200px，允许自适应 */
+    max-width: 350px; /* 设置最大宽度 */
+    text-align: center; /* 图片居中对齐 */
+}
+
+/* 设置图片的样式 */
+.photo-wrapper img {
+    width: 100%; /* 图片占满容器 */
+    height: auto; /* 保持图片的宽高比例 */
+}
+    
+/* flickr container 样式 end */
+
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .navigation,
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .artist-section,
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+        margin: 5px 0;
+    }
+}

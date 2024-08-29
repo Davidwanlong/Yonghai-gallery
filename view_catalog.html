@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>view_catalog</title>
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --w: 755px;
+            --h: 755px;
+        }
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #0c1c38;
+            font-family: Inter, Inter-Regular, sans-serif;
+        }
+        #book {
+            height: var(--h);
+            width: var(--w);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 1s;
+            margin: 0 auto;
+            perspective: 2000px;
+            transform-style: preserve-3d;
+        }
+
+        .book-cover {
+            height: var(--h);
+            width: var(--w);
+            position: absolute;
+            background-color: white;
+            transition: height 1s, width 1s, transform 1s;
+            transform-origin: left;
+            backface-visibility: visible;
+        }
+
+        .book-page {
+            height: var(--h);
+            width: var(--w);
+            position: absolute;
+            z-index: 100;
+            transition: transform 1s;
+            transform-origin: 0px;
+            background-size: cover;
+            backface-visibility: visible;
+        }
+        .book-page .front,
+        .book-page .back,
+        .book-cover .front,
+        .book-cover .back {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: white;
+            background-size: cover;
+            backface-visibility: visible;
+            top: 0;
+            left: 0;
+        }
+        .book-page .front,
+        .book-page .back{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #333;
+        }
+        .book-page .back,
+        .book-cover .back {
+            transform: rotateY(180deg);
+        }
+        #control {
+            position: fixed;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        #control button {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            border: 0;
+            margin: 0px 15px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50%;
+            background-color: rgba(63, 63, 63, 0.8);
+            outline: none;
+        }
+
+        .book-cover .front {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .artist-name {
+            font-size: 40px;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .album-title {
+            width: 468px;
+            height: 50px;
+            font-size: 40px;
+            color: white;
+            background-color: #9d2933;
+            padding: 5px 10px;
+            margin-bottom: 100px;
+        }
+        .book-cover .front .logo img {
+            width: 400px;
+            height: auto;
+            margin-left: -75px;
+            margin-bottom: 30px;
+        }
+        .address {
+            font-size: 14px;
+            color: black;
+        }
+        .artist-info {
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.6;
+            padding: 60px; 
+            line-height: 1.6;
+            text-align: justify; 
+            font-family: Arial, sans-serif; 
+            font-size: 16px; 
+            color: #333; 
+        }
+        .artist-info strong {
+            font-weight: bold;
+        }
+        .stamp-logo-container {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
+            display: flex;
+            align-items: flex-end;
+        }
+        .stamp {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .text-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .text {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .logo {
+            width: 250px;
+            height: auto;
+        }
+        .book-page .front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .p_cont {
+            margin-top: 20px;
+            margin-bottom: 5px;
+            width: 540px;
+            height: 540px;
+        }
+        .p_cont img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .book-page div a {
+            margin-top: 16px;
+            color: inherit; /* 使用父元素的文字颜色 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+        .b_b_c .front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .b_b_c .back {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .b_b_c .back .center-box {
+            margin-top: 200px;
+            margin-bottom: 190px;
+            width: 290px;
+            text-align: center;
+        }
+        .b_b_c .back .logo {
+            width: 100%;
+            height: auto;
+        }
+        .b_b_c .back .line {
+            width: 100%;
+            border: 1px solid #000;
+            margin: 10px 0;
+        }
+        .contact-info p {
+            margin: 5px 0;
+        }
+        .footer {
+            width: 100%;
+            text-align: center;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .thick-line {
+            width: 100%;
+            border: 2px solid #000;
+            margin: 10px 0 1px 0; /* 下边距设为 0px */
+        }
+        .thin-line {
+            width: 100%;
+            border: 1px solid #000;
+            margin-top: 0px; /* 确保与上面的线紧密相邻 */
+            margin-bottom: 5px;
+        }
+        .backtohome {
+            background-color: rgba(119, 119, 119, 0.6);
+            border-radius: 50%;
+            width: 47px;
+            height: 47px;
+            margin-left: 20px;
+            margin-top: -100px;
+        }
+        .backtohome:hover {
+            background-color: rgba(84, 84, 84, 0.6);
+        }
+        .backtohometext {
+            text-decoration: none;
+            color: black;
+            margin-left: 8px;
+            font-size: 40px;
+        }
+    </style>
+</head>
+
+<body>
+   <div class="backtohome">
+       <a class="backtohometext" href="./index.html">✕</a>
+   </div>
+
+    <div id="book">
+        <div class="book-cover one-page">
+            <div class="front">
+                <div class="artist-name">WANG YONGHAI</div>
+                <div class="album-title">Album of Painting</div>
+                <div class="logo">
+                    <img src="./images/t_logo.png" alt="Logo">
+                </div>
+                <div class="address">3-102, Longxingyuan, Jianshe Avenue, <br> Shijiazhuang City, Hebei Province, China
+                </div>
+            </div>
+            <div class="back">
+                <div class="artist-info">
+                    <strong>WANG YONGHAI</strong> Mr. Wang Yonghai, founder of the Hebei Oil Painters Gallery, is also
+                    the liaison for our gallery's artist group to this day. He was born on February 7, 1951, in
+                    Luancheng, Shijiazhuang. He has the distinctive characteristics of people of his generation:
+                    hardworking and innovative.
+                    He has loved oil painting creation since his youth and has been passionate about it for many years,
+                    creating to this day. His paintings are simple and natural, especially his preference for using
+                    simple brushstrokes to depict natural landscapes, and his rough brushstrokes contain his passion for
+                    nature and life.
+                    Mr. Wang is also an expert in the appreciation and collection of antiques, and he has studied the
+                    process of Western painting culture's influence on modern Chinese painting. In 2022, his monograph
+                    "The Archives of Chinese Art Students Abroad in Modern China" was published, which is meticulously
+                    researched and contains carefully selected illustrations, making it of great reference value to art
+                    history researchers and enthusiasts.
+                </div>
+                <div class="stamp-logo-container">
+                    <img class="stamp" src="./images/wu_wx.png" alt="画家图章">
+                    <div class="text-logo">
+                        <div class="text">WANG YOUNHAI on</div>
+                        <img class="logo" src="./images/t_logo.png" alt="Logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-page one-page">
+            <div class="front">
+              <img src="./images/artists/artist1.png" alt="">
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/025.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/017.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/027.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/039.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/paintings/banner1.png" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/paintings/banner8.png" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/047.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/048.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/014.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/021.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/018.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/041.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/019.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                   <img src="./images/wyh/022.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/028.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/002.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/003.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/005.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/020.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/030.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/038.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/042.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/023.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/035.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/051.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/006.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/008.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/011.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/013.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/024.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/036.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/wyh/050.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/052.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+        <div class="book-page one-page">
+            <div class="front">
+                <div class="p_cont">
+                    <img src="./images/paintings/banner3.png" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+            <div class="back">
+                <div class="p_cont">
+                    <img src="./images/wyh/055.jpg" alt="">
+                </div>
+                <div class="name">Scenery</div>
+                <div class="material">Oil on canvas</div>
+                <div class="size">40"✕30"</div>
+                <div class="price">$4850</div>
+                <a href="#">BUY NOW</a>
+            </div>
+        </div>
+
+        <div class="book-cover b_b_c one-page">
+            <div class="front">
+                <img src="./images/our-story/fa-pa.jpg" alt="">
+            </div>
+            <div class="back">
+                <div class="center-box">
+                    <img src="./images/t_logo.png" alt="Logo" class="logo">
+                    <hr class="line">
+                    <div class="contact-info">
+                        <p>3-102, Longxingyuan, Jianshe Avenue, Shijiazhuang, Hebei Province</p>
+                        <p>0086-136-4321-2174(China) </p>
+                        <p>587-225-4613 (Canada)</p>
+                        <p>https://davidwanlong.github.io/David-Gallery/</p>
+                    </div>
+                </div>
+                <div class="footer">
+                    <p>Copyright belongs to Hebei Oil-painting Artists Gallery</p>
+                    <hr class="thick-line">
+                    <hr class="thin-line">
+                    <p>The copyrights of artwork contained in this booklet are retained by the artists.</p>
+                    <p>Reproduction of any published material (images or text) is prohibited without the written permission by Hebei Oil-painting Artists Gallery.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="control">
+        <button>&lt;</button>
+        <button>&gt;</button>
+    </div>
+
+    <script>
+        // 总页数
+        const PAGECOUNT = 20;
+        //当前页面编号
+        let pageNo = 0;
+
+        // 内容页
+        let pages = document.querySelectorAll('.book-page');
+        // 封面页
+        let cover = document.querySelectorAll('.book-cover');
+        // 按钮
+        let btn = document.querySelectorAll('#control button');
+        //
+        let book = document.querySelector('#book');
+        // 所有页
+        let allPages = document.querySelectorAll('.one-page');
+
+        // 初始化
+        init();
+
+        function init() {
+            for (let index = 0; index < pages.length; index++) {
+                pages[index].style.zIndex = PAGECOUNT - index - 1
+
+                // 初始化时，隐藏所有的 back 页面
+                pages[index].querySelector('.back').style.visibility = 'hidden';
+            }
+            cover[0].style.zIndex = PAGECOUNT
+            cover[1].style.zIndex = 1
+
+            // 初始化首页的显示状态
+            allPages[0].querySelector('.front').style.visibility = 'visible';
+            allPages[0].querySelector('.back').style.visibility = 'hidden';
+
+
+            // 默认页面为封面， 左按钮无效
+            btn[0].style.backgroundColor = "rgba(110, 110, 110, 0.5)"
+            btn[0].style.color = "darkgray"
+            btn[0].disabled = true
+
+            // 左翻页
+            btn[0].onclick = function () {
+                pageNo--;
+                // 如果当前是最后一页, 并往前翻
+                if ((PAGECOUNT - 1) == pageNo) {
+                    allPages[pageNo].style.transform = 'rotateY(0deg)'
+                    // (240px + 50px) * 0.5
+                    book.style.transform = 'translateX(378.5px)'
+                    btn[1].style.backgroundColor = "rgba(63, 63, 63, 0.8)"
+                    btn[1].style.color = "white"
+                    btn[1].disabled = false
+                }
+                else {
+                    allPages[pageNo].style.transform = 'rotateY(0deg)'
+                }
+
+                // 控制页面正反面的显示
+                allPages[pageNo].querySelector('.front').style.visibility = 'visible';
+                allPages[pageNo].querySelector('.back').style.visibility = 'hidden';
+
+                allPages[pageNo].style.zIndex = PAGECOUNT - pageNo;
+
+                if (0 == pageNo) {
+                    btn[0].style.backgroundColor = "rgba(110, 110, 110, 0.5)"
+                    btn[0].style.color = "darkgray"
+                    btn[0].disabled = true
+                    book.style.transform = 'translateX(0px)'
+                }
+            }
+
+            //右翻页
+            btn[1].onclick = function () {
+                // 如果当前是第一页, 并往后翻
+                if (0 == pageNo) {
+                    allPages[pageNo].style.transform = 'rotateY(-180deg)'
+                    book.style.transform = 'translateX(378.5px)'
+                    btn[0].style.backgroundColor = "rgba(63, 63, 63, 0.8)"
+                    btn[0].style.color = "white"
+                    btn[0].disabled = false
+                }
+                else {
+                    allPages[pageNo].style.transform = 'rotateY(-180deg)'
+                }
+                // 控制页面正反面的显示
+                allPages[pageNo].querySelector('.front').style.visibility = 'hidden';
+                allPages[pageNo].querySelector('.back').style.visibility = 'visible';
+
+                allPages[pageNo].style.zIndex = 1000 + pageNo
+                pageNo++
+
+                if (PAGECOUNT == pageNo) {
+                    btn[1].style.backgroundColor = "rgba(110, 110, 110, 0.5)"
+                    btn[1].style.color = "darkgray"
+                    btn[1].disabled = true
+                    book.style.transform = 'translateX(820px)'
+                }
+            }
+        }
+        init()
+    </script>
+</body>
+</html>
