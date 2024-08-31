@@ -11,7 +11,26 @@ body {
 .topbar {
     background-color: #333;
     height: 40px;
-    width: 100%; /* 确保 topbar 的宽度为 100% */
+    width: 100%; 
+}
+.tl-container {
+    width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; /* 垂直居中 */
+    height: 100%;
+    padding-right: 20px; /* 可根据需要调整右边距 */
+}
+
+.portfolio-link {
+    color: white; /* 链接颜色 */
+    text-decoration: none; /* 去掉下划线 */
+    font-size: 16px; /* 可根据需要调整字体大小 */
+}
+
+.portfolio-link:hover {
+    color: #00abf0; /* 悬停效果 */
 }
 .wrap{
     width: 1300px;
@@ -538,21 +557,6 @@ h2 {
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
 }
 
-.card .large-image {
-    position: fixed;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(2.0);
-    max-width: 90%; /* 最大宽度不超过视口宽度的90% */
-    max-height: 90vh; /* 最大高度不超过视口高度的90% */
-    object-fit: contain; /* 保持长宽比显示图片，完全包含在容器内 */
-    display: none; /* 默认隐藏 */
-    z-index: 10; /* 让大图片在最上层 */
-}
-
-.card .small-image {
-    z-index: 1; /* 让小图片在大图片下层 */
-}
 
 .painting-title {
     width: 214px;
@@ -705,6 +709,54 @@ button.next {
     list-style-type: none;
 }
 /* 电梯样式 end */
+
+.home-sci {
+    position: relative;
+    margin: 15px auto;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.home-sci a {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: 2px solid #00abf0;
+    border-radius: 50%;
+    font-size: 15px;
+    color: #00abf0;
+    text-decoration: none;
+    overflow: hidden;
+    transition: .5s;
+    z-index: 1;
+}
+
+.home-sci a:hover {
+    color: #081b29;
+}
+
+.home-sci a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #00abf0;
+    transition: .5s;
+}
+
+.home-sci a:hover::before {
+    width: 100%;
+    z-index: -1;
+}
 
 
 /* 页脚样式 */
